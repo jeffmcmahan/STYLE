@@ -1,17 +1,17 @@
 # STYLE
 
-In general, working with react makes stylesheet includes feel really obtrusive and clunky. Inline styles are better, but you cannot have pseudo-elements and pseudo-classes. Solutions like JSS are woefully over-engineered and cost significant bytes just to turn JSON into CSS (which are already very similar).
+SPAs build on React make stylesheet includes obtrusive and clunky. Inline styles are more easily maintained, but you forfeit pseudo-elements and pseudo-classes and take a performance hit. Solutions like [JSS](http://cssinjs.org/?v=v6.2.0) cost significant bytes and add execution time, simply to turn JSON into CSS (and CSS-as-JSON is ugly).
 
 ## API
 Use template literals to author your CSS, pass it to STYLE to be injected as `<style>` blocks into the document `<head>`.
 
 ```js
 const CSS = (`
-  body {
+  .my-component {
     background: white;
     color: black;
   }
-  a {
+  .my-component a {
     color: blue;
     text-decoration: none;
   }
@@ -21,10 +21,10 @@ const CSS = (`
 STYLE('my-component', CSS)
 
 // Remove the style block:
-STYLE.rm('my-component')
+STYLE.rm('my-component') // <-- Usually not necessary.
 ```
 
-The aim is simply to make React component styles more maintainable without &approx;100kb+ of additional code to parse and execute. The same block will never be injected twice, so it's more performant than inline styles. It allows you to render a thousand instances of a component and only inject a single style block.
+The aim is simply to make React component styles more maintainable without &approx;100kb+ of additional code to parse and execute. The same block will never be injected twice, so it performs better than inline styles, since you can render a thousand instances of a component and only inject the corresponding style block once.
 
 Standard usage within React looks like this:
 
@@ -42,4 +42,4 @@ module.exports = React.createClass({
 ```
 
 ## Isolation
-STYLE defines a `.isolate` class that can be added to any element to keep it from inheriting values from its ancestors.
+STYLE defines an `.isolate` class that can be added to any element to keep it from inheriting style properties from its ancestors.
