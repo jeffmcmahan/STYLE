@@ -1,6 +1,6 @@
 # STYLE
 
-SPAs build on React make stylesheet includes obtrusive and clunky. Inline styles are more easily maintained, but you forfeit pseudo-elements and pseudo-classes and take a performance hit. Solutions like [JSS](http://cssinjs.org/?v=v6.2.0) cost significant bytes and add execution time, simply to turn JSON into CSS (and CSS-as-JSON is ugly).
+SPAs built on React make stylesheet includes obtrusive and clunky. Inline styles are more easily maintained, but you forfeit pseudo-elements and pseudo-classes and take a performance hit. Solutions like [JSS](http://cssinjs.org/?v=v6.2.0) cost significant bytes and add execution time, mostly to turn ugly JSON into style blocks.
 
 ## API
 Use template literals to author your CSS, pass it to STYLE to be injected as `<style>` blocks into the document `<head>`.
