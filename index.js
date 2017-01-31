@@ -1,6 +1,6 @@
-const state = {
-  // <id>: <balance>
-}
+'use strict'
+
+const state = {}
 
 function injectCSS(id, styles) {
   if (document.getElementById(id)) return
@@ -13,7 +13,6 @@ function injectCSS(id, styles) {
 
 function rmCSS(id) {
   const block = document.getElementById(id)
-  console.log(block)
   if (!block) return
   document.head.removeChild(block)
 }
@@ -23,6 +22,7 @@ function CSS(id, styles) {
   state[id]++
   if (state[id]) injectCSS(id, styles)
 }
+module.exports = CSS
 
 CSS.rm = function removeCSS(id) {
   if (!(id in state)) return
@@ -30,36 +30,4 @@ CSS.rm = function removeCSS(id) {
   if (state[id] <= 0) rmCSS(id)
 }
 
-// Inject the style isolation class.
-CSS('isolate', `
-  .isolate {
-    border-collapse: separate;
-    border-spacing: 0;
-    caption-side: top;
-    cursor: auto;
-    direction: ltr;
-    empty-cells: show;
-    font-family: serif;
-    font-size: medium;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: normal;
-    hyphens: none;
-    letter-spacing: normal;
-    list-style: disc outside none;
-    tab-size: 8;
-    text-align: left;
-    text-align-last: auto;
-    text-indent: 0;
-    text-shadow: none;
-    text-transform: none;
-    visibility: visible;
-    white-space: normal;
-    widows: 2;
-    word-spacing: normal;
-  }
-`)
-
-module.exports = CSS
+CSS('isolate', '.isolate{border-collapse:separate;border-spacing:0;caption-side:top;cursor:auto;direction:ltr;empty-cells:show;font-family:serif;font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:normal;hyphens:none;letter-spacing:normal;list-style:disc outside none;tab-size:8;text-align:left;text-align-last:auto;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;widows:2;word-spacing:normal;}')
