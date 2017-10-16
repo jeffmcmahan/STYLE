@@ -4,11 +4,12 @@
 const state = {__string: ''}
 
 // Inject a <style> block into the DOM.
-function injectCSS(id, styles) {
+function injectCSS(id, styles, media) {
   if (document.getElementById(id)) return
   const block = document.createElement('style')
   block.id = id
   block.type = 'text/css'
+  block.media = media
   block.innerHTML = styles
   document.head.appendChild(block)
 }
@@ -21,14 +22,14 @@ function rmCSS(id) {
 }
 
 // Create a new <style> block (and inject if in a browser).
-function CSS(id, styles) {
+function CSS(id, styles, media='screen') {
   if (!(id in state)) state[id] = 0
   state[id]++
   if (state[id]) {
     if (typeof window === 'undefined') {
-      state.__string += `<style id="${id}">${styles}</style>`
+      state.__string += `<style id="${id}" media="${media}">${styles}</style>`
     } else {
-      injectCSS(id, styles)
+      injectCSS(id, styles, media)
     }
   }
 }
