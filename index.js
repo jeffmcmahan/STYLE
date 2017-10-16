@@ -36,7 +36,7 @@ function CSS(id, styles, media='screen') {
 
 // Decrement the state counter for a given <style> block; remove if sensible.
 CSS.rm = function removeCSS(id) {
-  if (typeof window !== 'undefined') {
+  if (typeof window === 'undefined') {
     throw new Error('CSS.rm() only applies in the browser.')
   }
   if (!(id in state)) return
